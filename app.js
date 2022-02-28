@@ -15,9 +15,8 @@ app.get('/', (req, res) => {
   const usersQuery = req.query
   let imgForRender = db.images
 
-  if (usersQuery.limit !== undefined && Number.isNaN(+usersQuery.limit) === false) {
-    imgForRender = db.images.slice(0, usersQuery.limit)
-  }
+  if (usersQuery.reverse !== undefined && usersQuery.reverse === 'true') {
+    imagesForRender = db.images.reverse()
 
   res.render('main', { srcOfImg: imgForRender })
 })
@@ -37,3 +36,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server has been started on port: ${PORT}`)
 })
+
